@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shivam Pal | MERN Stack Developer | Portfolio</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      /* --- CSS VARIABLES (THEME CONFIG) --- */
+      :root {
+        /* Colors - Light Theme */
+        --primary: #6366f1; /* Indigo */
+        --primary-hover: #4f46e5;
+        --bg: #ffffff;
+        --bg-alt: #f8fafc; /* Alternating section color */
+        --text-main: #111827; /* Almost Black */
+        --text-muted: #4b5563; /* Grey */
+        --card-bg: #ffffff;
+        --nav-bg: rgba(255, 255, 255, 0.95);
+        --border: #e5e7eb;
+        --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05),
+          0 2px 4px -1px rgba(0, 0, 0, 0.03);
+
+        /* Spacing - "Equally Distributed" Logic */
+        --section-spacing: 120px; /* Consistent vertical padding */
+        --container-width: 1100px;
+        --nav-height: 80px;
+      }
+
+      /* Colors - Dark Theme */
+      [data-theme="dark"] {
+        --primary: #818cf8;
+        --primary-hover: #6366f1;
+        --bg: #0f172a; /* Deep Slate */
+        --bg-alt: #1e293b; /* Lighter Slate */
+        --text-main: #f8fafc;
+        --text-muted: #94a3b8;
+        --card-bg: #1e293b;
+        --nav-bg: rgba(15, 23, 42, 0.95);
+        --border: #334155;
+        --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      }
+
+      /* --- GLOBAL RESET --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: var(--nav-height);
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-main);
+        line-height: 1.7;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        transition: 0.2s ease;
+      }
+      ul {
+        list-style: none;
+      }
+
+      /* --- LAYOUT UTILITIES --- */
+      .container {
+        width: 100%;
+        max-width: var(--container-width);
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      /* --- NAVIGATION --- */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nav-height);
+        background: var(--nav-bg);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+      }
+
+      .nav-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
+
+      .logo {
+        font-weight: 800;
+        font-size: 1.5rem;
+        color: var(--primary);
+        letter-spacing: -0.5px;
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 2.5rem;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+      }
+
+      .nav-links a {
+        font-weight: 500;
+        font-size: 0.95rem;
+        color: var(--text-muted);
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .theme-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--text-main);
+        transition: all 0.3s ease;
+      }
+
+      .theme-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: rotate(15deg);
+      }
+
+      /* --- SECTIONS --- */
+      section {
+        padding: var(--section-spacing) 0;
+        border-bottom: 1px solid transparent;
+      }
+
+      .section-title {
+        font-size: 2.25rem;
+        text-align: center;
+        margin-bottom: 4rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+
+      .section-title span {
+        color: var(--primary);
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-title span::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 4px;
+        background: var(--primary);
+        border-radius: 2px;
+      }
+
+      /* --- HERO SECTION --- */
+      .hero {
+        min-height: 100vh; /* Full screen height */
+        padding-top: var(--nav-height);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        font-weight: 900;
+        letter-spacing: -2px;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        color: var(--text-muted);
+        max-width: 650px;
+        margin-bottom: 3rem;
+      }
+
+      .btn-group {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* --- BUTTONS --- */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 1rem 2.5rem;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: transform 0.2s, box-shadow 0.2s;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        border: 2px solid var(--primary);
+        box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.39);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-hover);
+        border-color: var(--primary-hover);
+        transform: translateY(-2px);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: var(--text-main);
+        border: 2px solid var(--border);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--text-main);
+        transform: translateY(-2px);
+      }
+
+      /* --- ABOUT --- */
+      .about-text {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto 1.5rem;
+        font-size: 1.15rem;
+        color: var(--text-muted);
+      }
+
+      /* --- SKILLS --- */
+      .skills-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .skill-pill {
+        background: var(--card-bg);
+        padding: 1rem 1.8rem;
+        border-radius: 16px;
+        font-weight: 600;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: var(--shadow);
+        transition: 0.3s;
+        font-size: 1rem;
+      }
+
+      .skill-pill i {
+        font-size: 1.4rem;
+        color: var(--primary);
+      }
+
+      .skill-pill:hover {
+        border-color: var(--primary);
+        transform: translateY(-3px);
+      }
+
+      /* --- PROJECTS --- */
+      .projects-wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2.5rem;
+      }
+
+      .project-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        border-color: var(--primary);
+      }
+
+      .project-body {
+        padding: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-main);
+        font-weight: 700;
+      }
+
+      .tech-stack {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+
+      .tech-tag {
+        font-size: 0.8rem;
+        background: rgba(99, 102, 241, 0.1);
+        color: var(--primary);
+        padding: 4px 12px;
+        border-radius: 100px;
+        font-weight: 600;
+      }
+
+      .project-desc {
+        font-size: 1rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        flex-grow: 1;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      .link-icon {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .link-icon:hover {
+        color: var(--primary);
+        text-decoration: underline;
+      }
+
+      /* --- CONTACT --- */
+      .contact-wrapper {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact-text {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 2.5rem;
+      }
+
+      .socials-row {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .social-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        color: var(--text-main);
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.3s;
+        box-shadow: var(--shadow);
+      }
+
+      .social-btn:hover {
+        color: white;
+        background: var(--primary);
+        border-color: var(--primary);
+        transform: translateY(-5px);
+      }
+
+      /* --- FOOTER --- */
+      footer {
+        text-align: center;
+        padding: 3rem 0;
+        border-top: 1px solid var(--border);
+        color: var(--text-muted);
+        margin-top: 2rem;
+        font-size: 0.95rem;
+      }
+
+      /* --- RESPONSIVE ADJUSTMENTS --- */
+      @media (max-width: 768px) {
+        :root {
+          --section-spacing: 60px;
+          --nav-height: 70px;
+        }
+        .hero h1 {
+          font-size: 2.8rem;
+        }
+        .nav-links {
+          display: none;
+        } /* Hidden on mobile */
+        .btn {
+          width: 100%;
+        }
+        .project-card {
+          margin-bottom: 1rem;
+        }
+        .container {
+          padding: 0 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <div class="nav-inner">
+          <a href="#" class="logo">shivampal-ofc</a>
+
+          <div class="nav-actions">
+            <div class="nav-links">
+              <a href="#about">About</a>
+              <a href="#skills">Skills</a>
+              <a href="#projects">Projects</a>
+              <a href="#contact">Contact</a>
+            </div>
+            <button
+              class="theme-btn"
+              id="theme-toggle"
+              aria-label="Toggle Theme"
+            >
+              <i class="fas fa-moon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero container">
+      <p style="color: var(--primary); font-weight: 600; margin-bottom: 10px">
+        Hello, I'm
+      </p>
+      <h1>Shivam Pal</h1>
+      <p>
+        MERN Stack Full Developer building scalable, modern, and user-centric
+        web applications.
+      </p>
+
+      <div class="btn-group">
+        <a href="#projects" class="btn btn-primary"> View My Work </a>
+        <a
+          href="YOUR_GOOGLE_DRIVE_LINK_HERE"
+          target="_blank"
+          class="btn btn-outline"
+        >
+          <i class="fas fa-download"></i> Resume
+        </a>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title"><span>About Me</span></h2>
+        <p class="about-text">
+          I am a passionate <strong>MERN Stack Developer</strong> dedicated to
+          writing clean, efficient code. I specialize in building full-stack
+          applications that solve real-world problems.
+        </p>
+        <p class="about-text">
+          With a strong foundation in algorithmic problem solving (HackerRank)
+          and open-source contributions, I am constantly learning new
+          technologies to deliver better digital experiences.
+        </p>
+      </div>
+    </section>
+
+    <section id="skills" style="background-color: var(--bg-alt)">
+      <div class="container">
+        <h2 class="section-title"><span>Technical Skills</span></h2>
+        <div class="skills-grid">
+          <div class="skill-pill"><i class="fab fa-js"></i> JavaScript</div>
+          <div class="skill-pill"><i class="fab fa-react"></i> React.js</div>
+          <div class="skill-pill"><i class="fab fa-node"></i> Node.js</div>
+          <div class="skill-pill"><i class="fas fa-database"></i> MongoDB</div>
+          <div class="skill-pill"><i class="fas fa-server"></i> Express</div>
+          <div class="skill-pill">
+            <i class="fab fa-html5"></i> HTML5 & CSS3
+          </div>
+          <div class="skill-pill">
+            <i class="fab fa-git-alt"></i> Git & GitHub
+          </div>
+          <div class="skill-pill">
+            <i class="fas fa-code"></i> Data Structures
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title"><span>Featured Projects</span></h2>
+        <div class="projects-wrapper">
+          <article class="project-card">
+            <div class="project-body">
+              <h3 class="project-title">AHL Lab Care Portal</h3>
+              <div class="tech-stack">
+                <span class="tech-tag">HTML5/CSS3/Bootstrap</span>
+                <span class="tech-tag">Node.js</span>
+                <span class="tech-tag">MongoDB</span>
+              </div>
+              <p class="project-desc">
+                A complete laboratory customer and admin management system. It
+                streamlines patient data handling, report generation, and lab
+                operations with a secure, responsive dashboard.
+              </p>
+              <div class="project-links">
+                <a
+                  href="https://ahlislive.onrender.com/"
+                  target="_blank"
+                  class="link-icon"
+                >
+                  <i class="fas fa-external-link-alt"></i> Live Demo
+                </a>
+                <a
+                  href="https://github.com/shivampal-ofc"
+                  target="_blank"
+                  class="link-icon"
+                >
+                  <i class="fab fa-github"></i> View Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-body">
+              <h3 class="project-title">More Projects</h3>
+              <div class="tech-stack">
+                <span class="tech-tag">MERN Stack</span>
+                <span class="tech-tag">Open Source</span>
+              </div>
+              <p class="project-desc">
+                Explore my GitHub repository to see my latest experiments,
+                coding challenges, and upcoming full-stack applications.
+              </p>
+              <div class="project-links">
+                <a
+                  href="https://github.com/shivampal-ofc"
+                  target="_blank"
+                  class="link-icon"
+                >
+                  <i class="fab fa-github"></i> Visit GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" style="background-color: var(--bg-alt)">
+      <div class="container">
+        <h2 class="section-title"><span>Connect With Me</span></h2>
+        <div class="contact-wrapper">
+          <p class="contact-text">
+            I am currently open to new opportunities. Whether you have a
+            question or just want to say hi, I'll try my best to get back to
+            you!
+          </p>
+
+          <a
+            href="mailto:shivampal.codes@gmail.com"
+            class="btn btn-primary"
+            style="padding: 1rem 3rem"
+          >
+            <i class="fas fa-envelope"></i> shivampal.codes@gmail.com
+          </a>
+
+          <div class="socials-row">
+            <a
+              href="https://in.linkedin.com/in/shivampal-ofc"
+              target="_blank"
+              class="social-btn"
+              aria-label="LinkedIn"
+            >
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+
+            <a
+              href="https://github.com/shivampal-ofc"
+              target="_blank"
+              class="social-btn"
+              aria-label="GitHub"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+
+            <a
+              href="https://x.com/shivampal_ofc"
+              target="_blank"
+              class="social-btn"
+              aria-label="X (Twitter)"
+            >
+              <i class="fa-brands fa-x-twitter"></i>
+            </a>
+
+            <a
+              href="https://www.hackerrank.com/profile/shivampal_ofc"
+              target="_blank"
+              class="social-btn"
+              aria-label="HackerRank"
+            >
+              <i class="fab fa-hackerrank"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2026 Shivam Pal. Built with
+          <i class="fas fa-heart" style="color: var(--primary)"></i> & Code.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Theme Toggle Logic
+      const toggleBtn = document.getElementById("theme-toggle");
+      const icon = toggleBtn.querySelector("i");
+      const body = document.body;
+
+      // Load saved theme
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        body.setAttribute("data-theme", "dark");
+        icon.classList.replace("fa-moon", "fa-sun");
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        if (body.hasAttribute("data-theme")) {
+          body.removeAttribute("data-theme");
+          localStorage.setItem("theme", "light");
+          icon.classList.replace("fa-sun", "fa-moon");
+        } else {
+          body.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+          icon.classList.replace("fa-moon", "fa-sun");
+        }
+      });
+
+      // Smooth Scroll with Header Offset
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
